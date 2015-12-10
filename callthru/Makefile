@@ -7,9 +7,8 @@
 # Use, duplication or disclosure restricted by
 # GSA ADP Schedule Contract with IBM Corporation.
 
-RELATIVE_SRC_TOP=../..
 
-CFLAGS = -I$(RELATIVE_SRC_TOP)/include -static -mpowerpc -g
+CFLAGS =  -mpowerpc -g
 
 TGTS	= callthru
 
