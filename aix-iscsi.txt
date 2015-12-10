@@ -1,0 +1,62 @@
+iSCSI BOOT ---------------------------------------------------
+Server IP.....................172.16.110.1
+Client IP.....................172.16.2.28
+Gateway IP....................172.16.2.1
+Subnet Mask...................255.255.255.0
+iSCSI Initiator...............iqn.2008-09.com.b2lab:server.client1
+iSCSI Target..................iqn.2008-09.com.b2lab:server.target2
+Target Port...................3260 
+Target LUN....................1000000000000 
+
+
+ 1.   Client IP Address  [172.16.2.28]
+ 2.   Gateway IP Address [172.16.2.1]
+ 3.   Subnet Mask        [255.255.255.0]
+ 4.   Set Initiator Name    
+ 5.   Enter ISCSI Target Parameters
+
+ 1.  Clear Current Name.
+ 2.  Edit  Current Name.
+ [guoliangaix7.dcits.com:2003-2015]
+
+ 1.   Target IP Address  [172.16.111.1]
+ 2.   ISCSI PORT         [3260]
+ 3.   Target lun         [1]
+ 4.   Set ISCSI Target Name       
+
+
+           
+ 1.  Clear Current Name.
+ 2.  Edit  Current Name.
+ [iqn.2008-09.com.b2lab:server.target1]
+
+                                Welcome to AIX.
+                       boot image timestamp: 10:24 12/10
+                 The current time and date: 10:45:44 12/10/2015
+        processor count: 1;  memory size: 4096MB;  kernel size: 35064581
+boot device: /vdevice/l-lan@30000002:iscsi,ciaddr=172.16.2.28,giaddr=172.16.2.1,subnet-mask=255.255.255.0,itname=iqn.2008-09.com.b2lab:server.client1,iport=3260,ilun=1000000000000,iname=iqn.2008-09.com.b2lab:server.target2,siaddr=172.16.110.1,2
+
+# lsattr -El hdisk0
+clr_q         no                                   Device CLEARS its Queue on error True
+host_addr     172.16.110.1                         Hostname or IP Address           False
+location                                           Location Label                   True
+lun_id        0x1000000000000                      Logical Unit Number ID           False
+max_transfer  0x40000                              Maximum TRANSFER Size            True
+port_num      0xcbc                                PORT Number                      False
+pvid          00f638806890269f0000000000000000     Physical volume identifier       False
+q_err         yes                                  Use QERR bit                     True
+q_type        simple                               Queuing TYPE                     True
+queue_depth   1                                    Queue DEPTH                      True
+reassign_to   120                                  REASSIGN time out value          True
+rw_timeout    30                                   READ/WRITE time out value        True
+start_timeout 60                                   START unit time out value        True
+target_name   iqn.2008-09.com.b2lab:server.target2 Target NAME                      False
+# lsattr -El iscsi0
+disc_filename  /etc/iscsi/targets                   Configuration file                            False
+disc_policy    odm                                  Discovery Policy                              True
+initiator_name iqn.2008-09.com.b2lab:server.client1 iSCSI Initiator Name                          True
+isns_srvnames  auto                                 iSNS Servers IP Addresses                     True
+isns_srvports                                       iSNS Servers Port Numbers                     True
+max_targets    16                                   Maximum Targets Allowed                       True
+num_cmd_elems  200                                  Maximum number of commands to queue to driver True
+
