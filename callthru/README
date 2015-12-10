@@ -1,0 +1,4 @@
+
+Programs in this directory use the "callthru" services of Mambo to perform functions
+within the simulated system using services of the underlying host system.  These
+programs must be compiled for and executed in the simulated system.
