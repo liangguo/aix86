@@ -1,0 +1,2 @@
+#!/bin/sh
+ /y/aix86/systemsim-p8/run/pegasus/power8 -f boot-aix.tcl

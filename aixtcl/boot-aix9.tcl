@@ -42,9 +42,9 @@ proc config_hook { conf } {
 # system
 #set kernel unix2
 #set diskimg_file aix.img
-source $env(LIB_DIR)/pegasus/systemsim.tcl
+source $env(LIB_DIR)/p9/systemsim.tcl
 
-source $env(RUN_DIR)/pegasus/p8-devtree.tcl
+source $env(RUN_DIR)/p9/p9-devtree.tcl
 
 
 source aix_utils.tcl
@@ -81,7 +81,7 @@ set entry_point 0x18
 
 Config_For_AIX $conf
 Setup_For_AIX $sim
-set_aix_bootargs "-s verbose" $sim
+#set_aix_bootargs "-s verbose" $sim
 aix_patch_hypervisor_emu_assist_intr
 #aix_check_boot_files
 #puts [AIXUtils::get_function_entry $AIX_KERNEL_SYMBOL_FILE]
@@ -89,13 +89,14 @@ aix_patch_hypervisor_emu_assist_intr
 #set cdboot_file AIX_CD1.cow
 
 #set_aix_process_triggers $sim 10
-$sim console create aaa inout listen 3333
 $sim load elf /y/aix86/b2lab/boot.ent 0x0 
 #$sim load elf /mnt/img3/mambo.img 0x0
 #$sim load elf sh
 #puts [AIXUtils::get_function_entry "initp"]
 $sim mode fastest
-$sim go
+$sim config console create c1 inout socket 0.0.0.0:22233 
+$sim config console enable c1
+#$sim go
 #wait_for_aix_prompt $sim
 #puts [aix_patch_hypervisor_emu_assist_intr]
 #puts [aix_system_console]
