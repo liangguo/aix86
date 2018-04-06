@@ -1,4 +1,4 @@
-
+#!/y/aix86/systemsim-p8/run/pegasus/power8 -f 
 
 #------------------------------------------------------------------------
 #
@@ -23,7 +23,7 @@
 
 source $env(LIB_DIR)/common/openfirmware_utils.tcl
 proc config_hook { conf } {
-    $conf config cpus 2
+    $conf config cpus 1
     $conf config processor/number_of_threads 1
     $conf config memory_size 2048M
     # We're not running under a hypervisor so we want external interrupts
@@ -57,10 +57,16 @@ source aix.tcl
 # bogus disk
 #set diskimg_file aix.img
 
-set diskimg_file /y/aix86/systemsim-p8/images/szaix/rootvg
+#set diskimg_file /y/aix86/images/hdisk1.img
+#set diskimg_file /y/aix86/systemsim-p8/images/szaix/rootvg
 #mysim bogus disk init 0 $cdboot_file r
-mysim bogus disk init 0 $diskimg_file cow
+#mysim bogus disk init 0 $diskimg_file cow
 
+#set diskimg_file /y/aix86/images/aix71.hdisk1.img 
+#mysim bogus disk init 0 /y/soft/ibm/aix/AIX_7.1_TL_7100-00-01/AIX_7.1_Base_Operating_System_TL_7100-00-01_DVD_1_of_2_102010.iso r
+mysim bogus disk init 0 /y/aix86/b2labroot/bootcd/cd_image_10027020.vol1 r
+#mysim bogus disk init 1 /y/soft/ibm/aix/5.1/AIX_5.1_01.iso r
+#mysim bogus disk init 0 $diskimg_file rw
 
 #mysim bogus disk init 0 $diskimg_file r
 set sim "mysim"
@@ -89,8 +95,19 @@ aix_patch_hypervisor_emu_assist_intr
 #set cdboot_file AIX_CD1.cow
 
 #set_aix_process_triggers $sim 10
-$sim console create aaa inout listen 3333
-$sim load elf /y/aix86/b2lab/boot.ent 0x0 
+if { [info exists env(LISTENPORT)]  } {
+	$sim console create aaa inout listen $env(LISTENPORT)
+		    
+} {
+	$sim console create aaa inout listen 3333
+}
+
+#$sim console create aaa inout listen 3333
+#$sim load elf /y/aix86/vlp71/boot.disk 0x0 
+$sim load elf $env(AIXKERNEL) 0x0
+#$sim load elf /y/aix86/vlp71/boot.ent 0x0 
+#$sim load elf /y/aix86/boot.disk 0x0 
+#$sim load elf /y/aix86/b2lab/boot.ent 0x0 
 #$sim load elf /mnt/img3/mambo.img 0x0
 #$sim load elf sh
 #puts [AIXUtils::get_function_entry "initp"]

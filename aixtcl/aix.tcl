@@ -389,6 +389,7 @@ proc AIX_Update_OF_Tree { {sim mysim} } {
     $sim mcm 0 of addprop $bogusdisk_node "string" "device_type" "block"
     $sim mcm 0 of addprop $bogusdisk_node "int" "reg" 0x50000000
 
+
     # Add RTAS items
     puts "Adding /rtas info..."
     set rtas_node [ $sim mcm 0 of find_device "/rtas" ]
@@ -442,8 +443,8 @@ proc AIX_Update_OF_Tree { {sim mysim} } {
     }
     $sim mcm 0 of addprop $chosen_node "int" "memory" $memory_node
 #    $sim mcm 0 of addprop $chosen_node "string" "bootpath" "mambo bogusdiskdevice"
-    #$sim mcm 0 of addprop $chosen_node "string" "bootpath" "/vdevice/bogusdisk@50000000"
-    $sim mcm 0 of addprop $chosen_node "string" "bootpath" "tap0"
+    $sim mcm 0 of addprop $chosen_node "string" "bootpath" "/vdevice/bogusdisk@50000000"
+#    $sim mcm 0 of addprop $chosen_node "string" "bootpath" "tap0"
 #    $sim mcm 0 of addprop $chosen_node "string" "bootpath" "/vdevice/v-scsi@30000003/disk@8700000000000000"
 
     $sim mcm 0 of addprop $chosen_node "string" "bootargs" ""
